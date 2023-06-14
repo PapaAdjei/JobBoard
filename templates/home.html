@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -9,8 +11,13 @@
     <body>
       <div class="container">
         <ol class="breadcrumb my-4">
+           
+
+            {% block breadcrumb %}
             <li class="breadcrumb-item active">Boards</li>
+            {% endblock %}
         </ol>
+        {% block content %}
         <table class="table">
             <thead class="thead-inverse">
                 <tr>
@@ -24,7 +31,7 @@
                 {% for board in boards %}
                 <tr>
                     <td>
-                        {{board.name}} <br>
+                        <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
                         <small class="text-muted d-block">{{board.description}}</small>
                     </td>
                     <td class="align-middle">0</td>
@@ -34,6 +41,7 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% endblock %}
      </div>
     </body>
 </html>
